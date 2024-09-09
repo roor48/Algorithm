@@ -1,0 +1,1 @@
+main(a,b){scanf("%d%d",&a,&b);printf("%d\n%d\n%d\n%d",b%10*a,b/10%10*a,b/100*a,a*b);}
