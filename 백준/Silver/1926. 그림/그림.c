@@ -51,7 +51,7 @@ int main()
         }
     }
 
-    printf("%d\n%d", count, area);
+    printf("%d %d", count, area);
 
     return 0;
 }
