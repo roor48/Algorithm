@@ -24,14 +24,13 @@ int main()
     graph[9].insert(graph[9].end(), {6, 8});
 
     vector<int>::iterator iter;
-    for (int i = 1; i < 1000; i++)
+    for (int i = 2; i <= 1000; i++)
     {
         for (int j = 0; j < 10; j++)
         {
             for (iter=graph[j].begin(); iter!=graph[j].end(); iter++)
             {
-                // dp[i][j] = (dp[i][j] + dp[i-1][*iter]) % 1234567;
-                dp[i+1][*iter] = (dp[i+1][*iter] + dp[i][j]) % 1234567;
+                dp[i][j] = (dp[i][j] + dp[i-1][*iter]) % 1234567;
             }
         }
     }
