@@ -20,7 +20,7 @@ int main()
         if (y<=0)
             y = 1;
 
-        if (x > L && y==1) // 우측 -> 좌측
+        if (x > L) // 우측 -> 좌측
         {
             dirX = -1;
             dirY = 1;
@@ -28,7 +28,7 @@ int main()
             L++;
         }
 
-        if (y > L && x==1) // 좌측 -> 우측
+        if (y > L) // 좌측 -> 우측
         {
             dirX = 1;
             dirY = -1;
@@ -37,6 +37,6 @@ int main()
         }
     }
 
-    cout << y << '/' << x << "\n";
+    cout << y << '/' << x;
     return 0;
 }
