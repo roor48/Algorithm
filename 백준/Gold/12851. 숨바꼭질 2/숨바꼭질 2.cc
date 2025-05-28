@@ -4,7 +4,7 @@
 using namespace std;
 
 int N, K;
-int arr[199999];
+int arr[100001];
 queue<pair<int, int>> q;
 
 int getCnt(int pos)
@@ -23,7 +23,7 @@ int getCnt(int pos)
         else if (i==2)
             next = pos-1;
 
-        if (next > 199998 || next < 0)
+        if (next > 100000 || next < 0)
             continue;
         
         if ((arr[next] - arr[pos]) == 1)
@@ -49,7 +49,7 @@ int main()
         int cnt = q.front().second;
         q.pop();
 
-        if (pos > 199998 || pos < 0 || arr[pos] != -1)
+        if (pos > 100000 || pos < 0 || arr[pos] != -1)
             continue;
         
         arr[pos] = cnt;
