@@ -1,68 +1,58 @@
 #include <iostream>
 #include <queue>
-#include <string.h>
 using namespace std;
 
 int N, K;
 int arr[100001];
-queue<pair<int, int>> q;
-
-int getCnt(int pos)
-{
-    if (pos == K)
-        return 1;
-    
-    int ans = 0;
-    for (int i = 0;  i < 3; i++)
-    {
-        int next = -1;
-        if (i==0)
-            next = pos*2;
-        else if (i==1)
-            next = pos+1;
-        else if (i==2)
-            next = pos-1;
-
-        if (next > 100000 || next < 0)
-            continue;
-        
-        if ((arr[next] - arr[pos]) == 1)
-        {
-            ans += getCnt(next);
-        }
-    }
-
-
-    return ans;
-}
+queue<int> q;
+int ans=0;
 
 int main()
 {
-    memset(arr, -1, sizeof arr);
+    fill(arr, arr+100001, 1e9);
     cin >> N >> K;
 
-    q.push(make_pair(N, 0));
+    if (N==K)
+    {
+        cout << "0 1";
+        return 0;
+    }
+
+    arr[N] = 0;
+    q.push(N);
 
     while(!q.empty())
     {
-        int pos = q.front().first;
-        int cnt = q.front().second;
+        int pos = q.front();
         q.pop();
 
-        if (pos > 100000 || pos < 0 || arr[pos] != -1)
-            continue;
-        
-        arr[pos] = cnt;
-        
-        q.push(make_pair(pos*2, cnt+1));
-        q.push(make_pair(pos+1, cnt+1));
-        q.push(make_pair(pos-1, cnt+1));
+        for (int i = 0; i < 3; i++)
+        {
+            int next = -1;
+            if (i==0)
+                next = pos-1;
+            else if (i==1)
+                next = pos+1;
+            else if (i==2)
+                next = pos*2;
+
+            if (next > 100000 || next < 0)
+                continue;
+            if (arr[next] < arr[pos]+1)
+                continue;
+
+            arr[next] = arr[pos] + 1;
+            if (next==K)
+            {
+                ans++;
+                continue;
+            }
+            
+            q.push(next);
+        }
     }
 
-    cout << arr[K] << ' ';
-
-
-    cout << getCnt(N);
+    cout << arr[K] << ' ' << ans;
     
     return 0;
 }
