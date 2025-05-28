@@ -1,3 +1,5 @@
+[참고문헌](https://developerhan.tistory.com/30)
+
 # [Platinum II] 크로스와 크로스 - 3596 
 
 [문제 링크](https://www.acmicpc.net/problem/3596) 
