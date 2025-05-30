@@ -23,20 +23,10 @@ int main()
         for (int j = 0; j <= M; j++)
         {
             if (j < C[i])
-            {
                 dp[i][j] = dp[i-1][j];
-            }
             else
-            {
-                if (dp[i-1][j] >= dp[i-1][j-C[i]] + P[i])
-                {
-                    dp[i][j] = dp[i-1][j];
-                }
-                else
-                {
-                    dp[i][j] = dp[i-1][j-C[i]] + P[i];
-                }
-            }
+                // dp[i][j] = max(i번 강의을 안들었을때, 들었을때) 총 학점이 j가 되는 상황
+                dp[i][j] = max (dp[i-1][j], dp[i-1][j-C[i]] + P[i]);
         }
     }
 
@@ -66,6 +56,7 @@ int main()
         if (dp[num][lastCredit] == dp[num-1][lastCredit]) // num번 강의를 안 들었으면
             continue;
         
+        // num번 강의를 들었으면 num번 강의를 듣기 전 상황으로 가기
         lastCredit -= C[num];
         ans.push_back(num);
     }
