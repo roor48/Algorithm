@@ -14,10 +14,10 @@ int main()
     cin >> N;
     for (int i = 0; i < N; i++)
         cin >> arr[i].first >> arr[i].second;
-    sort(arr, arr+N);
+    sort(arr, arr+N); // x 기준으로 오름차순 정렬
 
     int cnt = 0;
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i <= N; i++) // arr[N]은 {0, 0} 임
     {
         while (!s.empty() && (s.top().second > arr[i].second))
         {
@@ -37,12 +37,7 @@ int main()
             continue;
         }
     }
-
-    while (!s.empty() && (s.top().second > 0))
-    {
-        cnt++;
-        s.pop();
-    }
+    
     cout << cnt;
 
     return 0;
