@@ -21,11 +21,9 @@ int main() {
         
         if (k <= cnt) {
             cout << (n ^ ((1<<i)-1))+1;
-
-            return 0;
+            break;
         }
     }
-    
-    cout << "-1";
+
     return 0;
 }
