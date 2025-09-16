@@ -8,38 +8,38 @@ void update(int node, int val) {
     node += bottom;
     tree[node] = val;
 
-    int parent = node>>1;
-    int leftNode = node & ~1;
-    int rightNode = node | 1;
-
-    if (tree[rightNode] == 0) {
-        tree[parent] = leftNode - bottom;
-    } else if (tree[leftNode] <= tree[rightNode]) {
-        tree[parent] = leftNode - bottom;
-    } else {
-        tree[parent] = rightNode - bottom;
-    }
-
-    node = parent;
     while(node>1) {
-        parent = node>>1;
-        leftNode = node & ~1;
-        rightNode = node | 1;
+        int parent = node>>1;
 
-        int leftVal = tree[bottom + tree[leftNode]];
-        int rightVal = tree[bottom + tree[rightNode]];
+        int otherNode = node + ((node&1) ? -1 : 1);
 
-        // 왼쪽부터 채우기 때문에 leftNode가 0인 경우는 없음
-        if (tree[rightNode]==0) {
-            tree[parent] = tree[leftNode];
-        } else if (leftVal <= rightVal) {
-            tree[parent] = tree[leftNode];
-        } else {
-            tree[parent] = tree[rightNode];
+        if (tree[otherNode]==0) {
+            tree[parent] = tree[node];
+        }
+        else {
+            tree[parent] = min(tree[node], tree[otherNode]);
         }
 
         node = parent;
     }
+}
+
+int find() {
+    int node = 1;
+
+    while (node <= bottom) {
+        int left = node*2;
+        int right = node*2+1;
+
+        if (tree[node] == tree[left]) {
+            node = left;
+        } else {
+            node = right;
+        }
+    }
+
+    return node-bottom;
+
 }
 
 int main() {
@@ -68,7 +68,7 @@ int main() {
             cin >> b >> c;
             update(b, c);
         } else {
-            cout << tree[1] << '\n';
+            cout << find() << '\n';
         }
     }
     
