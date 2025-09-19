@@ -1,34 +1,25 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 int dp[1001][1001];
+int main() {
+    string a, b;
+    cin >> a >> b;
 
-int max(int a, int b)
-{
-  return a > b ? a : b;
-}
+    int a_len = a.size();
+    int b_len = b.size();
 
-int main()
-{
-  string S1, S2;
-  cin >> S1 >> S2;
-
-  S1 = '0'+S1;
-  S2 = '0'+S2;
-
-  // printf("%d %d", S1Len, S2Len);
-  for (int i = 0; i < S1.size(); i++)
-  {
-    for (int j = 0; j < S2.size(); j++)
-    {
-      if (i==0 || j==0) dp[i][j] = 0;
-      
-      else if (S1[i]==S2[j]) dp[i][j] = dp[i-1][j-1] + 1;
-
-      else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+    for (int i = 1; i <= a_len; i++) {
+        for (int j = 1; j <= b_len; j++) {
+            if (a[i-1] == b[j-1]) {
+                dp[i][j] = dp[i-1][j-1]+1;
+            } else {
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+            }
+        }
     }
-  }
 
-  printf("%d", dp[S1.size()-1][S2.size()-1]);
+    cout << dp[a_len][b_len];
+
+    return 0;
 }
