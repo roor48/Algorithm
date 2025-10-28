@@ -13,13 +13,13 @@ int main() {
     }
 
     int ans = arr[0];
-    int minVal = 100'000'001;
+    int minVal = 1001;
     dp[0][0] = arr[0];
-    dp[0][1] = -100'000'001;
+    dp[0][1] = -1001;
     for (int i = 1; i < N; i++) {
         if (dp[i-1][0] < 0) {
             dp[i][0] = arr[i];
-            minVal = 100'000'001;
+            minVal = 1001;
         } else {
             dp[i][0] = dp[i-1][0] + arr[i];
             minVal = min(minVal, arr[i]);
