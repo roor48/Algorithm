@@ -10,7 +10,7 @@ int f(int a, int b) {
     if (a==N || b==N)
         return 0;
 
-    if (dp[a][b])
+    if (dp[a][b] != -1)
         return dp[a][b];
 
     dp[a][b] = max(f(a+1, b), f(a+1, b+1));
@@ -22,6 +22,7 @@ int f(int a, int b) {
 
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    memset(dp, -1, sizeof dp);
 
     cin >> N;
     for (int i = 0; i < N; i++) {
