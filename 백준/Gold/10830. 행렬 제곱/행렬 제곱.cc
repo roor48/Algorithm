@@ -33,7 +33,7 @@ long long **multi(long long **a, long long **b)
         }
     }
 
-    // free(a);
+    free(a);
     return t;
 }
 
