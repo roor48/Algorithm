@@ -1,23 +1,17 @@
 #include <stdio.h>
-#include <memory.h>
 
 typedef struct {
-    // -1 == NULL
+    // -1 == null
     int value;
     int left;
     int right;
 } Node;
 
 int N;
-int visited[26];
 Node tree[26];
 
 // 전위 순회
 void preorder(Node *node) {
-    if (visited[node->value])
-        return;
-    visited[node->value] = 1;
-
     printf("%c", 'A' + node->value);
     if (node->left != -1)
         preorder(&tree[node->left]);
@@ -27,10 +21,6 @@ void preorder(Node *node) {
 
 // 중위 순회
 void inorder(Node *node) {
-    if (visited[node->value])
-        return;
-    visited[node->value] = 1;
-    
     if (node->left != -1)
         inorder(&tree[node->left]);
     printf("%c", 'A' + node->value);
@@ -41,10 +31,6 @@ void inorder(Node *node) {
 
 // 후위 순회
 void postorder(Node *node) {
-    if (visited[node->value])
-        return;
-    visited[node->value] = 1;
-
     if (node->left != -1)
         postorder(&tree[node->left]);
     if (node->right != -1)
@@ -65,13 +51,8 @@ int main() {
         tree[a - 'A'].right = (c == '.') ? -1 : (c - 'A');
     }
 
-    memset(visited, 0, sizeof(visited));
     preorder(tree); puts("");
-
-    memset(visited, 0, sizeof(visited));
-    inorder(tree);  puts("");
-    
-    memset(visited, 0, sizeof(visited));
+    inorder(tree); puts("");
     postorder(tree); puts("");
 
     return 0;
