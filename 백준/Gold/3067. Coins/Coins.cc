@@ -3,26 +3,22 @@ using namespace std;
 
 int dp[10001];
 int main() {
-    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    int T, N, a;
-    
+    int T, N, M;
     cin >> T;
     while (T--) {
         memset(dp, 0, sizeof dp);
-        
         cin >> N;
         for (int i = 0; i < N; i++) {
+            int a;
             cin >> a;
-            
-            dp[a] += 1;
-            for (int m = a; m <= 10000; m++) {
-                dp[m] += dp[m-a];
+            dp[a]++;
+            for (int j = a; j <= 10000; j++) {
+                dp[j] += dp[j-a];
             }
         }
-        
-        cin >> a;
-        cout << dp[a] << '\n';
+        cin >> M;
+        cout << dp[M] << '\n';
     }
-
+    
     return 0;
 }
